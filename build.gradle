@@ -1,0 +1,190 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath group: 'com.netflix.nebula', name: 'nebula-dependency-recommender', version: '4.2.0'
+        classpath group: 'com.netflix.nebula', name: 'nebula-publishing-plugin', version: '4.2.0'
+        classpath group: 'com.jfrog.bintray.gradle', name: 'gradle-bintray-plugin', version: '1.7.3'
+        classpath group: 'org.starchartlabs.flare', name: 'flare-operations-plugins', version: '0.1.0'
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'jacoco'
+apply plugin: 'maven-publish'
+apply plugin: 'nebula.dependency-recommender'
+apply plugin: 'nebula.maven-resolved-dependencies'
+apply plugin: 'nebula.maven-base-publish'
+apply plugin: 'nebula.maven-dependencies'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'org.starchartlabs.flare.increase-test-logging'
+apply plugin: 'org.starchartlabs.flare.dependency-insight'
+
+description = 'Gradle plug-ins to enhance publishing operations such as jar and POM generation'
+
+dependencyRecommendations {
+    dependencyLock file: file("${rootDir}/dependencies.lock")
+}
+
+//Default all projects to a synchronized IDE version number
+group = 'org.starchartlabs.flare'
+
+sourceCompatibility = "${javaVersion}"
+
+//Always download sources, to allow debugging, and use Eclipse containers for greater portability
+eclipse {
+    classpath {
+        downloadSources=true
+        containers = [ 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8' ]
+    }
+}
+
+//JCenter is the Gradle plug-in standard
+repositories {
+    jcenter()
+}
+
+//Dependency versions managed in $rootDir/dependencies.lock
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    
+    testCompile group: 'org.testng', name: 'testng'
+}
+
+//Add LICENSE so it is included in all JARs, fulfilling the "distributions include license" requirement
+jar{
+    from("${rootDir}"){
+        include 'LICENSE'
+    }
+}
+
+//All projects should provide source code and javadoc, and upload these with any released artifacts
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+
+    from("${rootDir}"){
+        include 'LICENSE'
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+
+    from("${rootDir}"){
+        include 'LICENSE'
+    }
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+//Setup default test behavior, including failure logging
+test {
+    useTestNG() {
+        useDefaultListeners = true
+    }
+}
+
+jacocoTestReport {
+    reports {
+        executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+        
+        sourceSets project.sourceSets.main
+        
+        xml.enabled true
+        csv.enabled false
+        html.enabled false
+        xml.destination "${buildDir}/reports/jacoco/report.xml"
+    }
+}
+
+jacocoTestReport.dependsOn test
+check.dependsOn jacocoTestReport
+
+//If not a remote run, publish to local only
+if(!project.hasProperty('remoteDeploy')){
+    publishing {
+        repositories {
+            mavenLocal()
+        }
+    }
+}
+
+publishing {
+    publications {
+        nebula(MavenPublication) {
+            artifact sourcesJar {
+                classifier 'sources'
+            }
+            artifact javadocJar {
+                classifier 'javadoc'
+            }
+            pom.withXml {
+                configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
+                    asNode().dependencies[0].dependency.find {
+                        it.artifactId[0].text() == dep.moduleName &&
+                        it.groupId[0].text() == dep.moduleGroup
+                    }?.scope[0]?.value = 'compile'
+                }
+
+                asNode().appendNode('url', 'https://github.com/StarChart-Labs/flare-publishing-plugins')
+                Node licenseNode = asNode().appendNode('licenses').appendNode('license')
+
+                licenseNode.appendNode('name', 'The MIT License')
+                licenseNode.appendNode('url', 'https://opensource.org/licenses/MIT')
+                licenseNode.appendNode('distribution', 'repo')
+
+                Node scmNode = asNode().appendNode('scm')
+                scmNode.appendNode('connection', 'scm:git:git://github.com/StarChart-Labs/flare-publishing-plugins.git')
+                scmNode.appendNode('developerConnection', 'scm:git:ssh://github.com/StarChart-Labs/flare-publishing-plugins.git')
+                scmNode.appendNode('url', 'https://github.com/StarChart-Labs/flare-publishing-plugins')
+
+                Node developerNode = asNode().appendNode('developers').appendNode('developer')
+
+                developerNode.appendNode('id', 'romeara')
+                developerNode.appendNode('name', 'Ryan OMeara')
+                developerNode.appendNode('url', 'https://github.com/romeara')
+            }
+        }
+    }
+}
+
+bintray {
+    user = System.getProperty('bintray_user')
+    key = System.getProperty('bintray_key')
+    publications = [ 'nebula' ]
+
+    if(!project.hasProperty('remoteDeploy')){
+        dryRun = true
+    }
+
+    pkg {
+        repo = 'flare'
+        name = "${project.name}"
+        userOrg = 'starchart-labs'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/StarChart-Labs/flare-publishing-plugins.git'
+
+        version {
+            name = "${project.version}"
+            desc = "${project.name} release ${project.version} final"
+            released  = new Date()
+            vcsTag = "v${project.version}"
+
+            gpg {
+                sign = true
+            }
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "${gradleVersion}"
+}
