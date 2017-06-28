@@ -1,6 +1,6 @@
 # flare-publishing-plugins
 
-[![Travis CI](https://img.shields.io/travis/StarChart-Labs/flare-publishing-plugins.svg?branch=master)](https://travis-ci.org/StarChart-Labs/flare-publishing-plugins) [![Code Coverage](https://img.shields.io/codecov/c/github/StarChart-Labs/flare-publishing-plugins.svg)](https://codecov.io/github/StarChart-Labs/flare-publishing-plugins) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Travis CI](https://img.shields.io/travis/StarChart-Labs/flare-publishing-plugins.svg?branch=master)](https://travis-ci.org/StarChart-Labs/flare-publishing-plugins) [![Code Coverage](https://img.shields.io/codecov/c/github/StarChart-Labs/flare-publishing-plugins.svg)](https://codecov.io/github/StarChart-Labs/flare-publishing-plugins) [![Black Duck Security Risk](https://copilot.blackducksoftware.com/github/groups/StarChart-Labs/locations/flare-publishing-plugins/public/results/branches/master/badge-risk.svg)](https://copilot.blackducksoftware.com/github/groups/StarChart-Labs/locations/flare-publishing-plugins/public/results/branches/master) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 * [Legal](#legal)
 * [Contributing](#contributing)
