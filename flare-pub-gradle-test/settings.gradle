@@ -1,0 +1,2 @@
+include 'flare-test-subproject1'
+include 'flare-test-subproject2'

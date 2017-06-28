@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'com.netflix.nebula', name: 'nebula-publishing-plugin', version: '4.2.0'
+        classpath group: 'org.starchartlabs.flare', name: 'flare-publishing-plugins', version: '0.1.0-SNAPSHOT', changing: true
+    }
+}
+
+allprojects{
+    apply plugin: 'java'
+    
+    repositories{
+        mavenCentral()
+    }
+}
+
+subprojects{
+    apply plugin: 'maven-publish'
+    apply plugin: 'nebula.maven-base-publish'
+    apply plugin: 'nebula.maven-dependencies'
+    apply plugin: 'org.starchartlabs.flare.pom-scope-correction'
+    
+    publishing {
+        repositories {
+            mavenLocal()
+        }
+        publications {
+            nebula(MavenPublication) {
+
+//                pom.withXml {
+//                    configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
+//                        asNode().dependencies[0].dependency.find {
+//                            it.artifactId[0].text() == dep.moduleName &&
+//                            it.groupId[0].text() == dep.moduleGroup
+//                        }?.scope[0]?.value = 'compile'
+//                    }
+//                }
+            }
+        }
+    }
+}
