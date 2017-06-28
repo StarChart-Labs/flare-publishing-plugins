@@ -1,0 +1,17 @@
+language: groovy
+
+jdk:
+  - oraclejdk8
+  
+before_install:
+  - pip install --user codecov
+  
+after_success:
+  - codecov
+  
+notifications:
+  email:
+    recipients:
+      - corona.ide.dev@gmail.com
+    on_success: change
+    on_failure: always
