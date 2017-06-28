@@ -1,5 +1,7 @@
 # flare-publishing-plugins
 
+[![Travis CI](https://img.shields.io/travis/StarChart-Labs/flare-publishing-plugins.svg?branch=master)](https://travis-ci.org/StarChart-Labs/flare-publishing-plugins) [![Code Coverage](https://img.shields.io/codecov/c/github/StarChart-Labs/flare-publishing-plugins.svg)](https://codecov.io/github/StarChart-Labs/flare-publishing-plugins) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 * [Legal](#legal)
 * [Contributing](#contributing)
 * [Plugins](#plugins)
