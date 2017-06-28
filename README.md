@@ -4,6 +4,7 @@
 * [Contributing](#contributing)
 * [Plugins](#plugins)
     * [org.starchartlabs.flare.pom-scope-correction](#org.starchartlabs.flare.pom-scope-correction)
+    * [org.starchartlabs.flare.source-jars](#org.starchartlabs.flare.source-jars)
 
 ## Legal
 
@@ -22,3 +23,9 @@ Information for how to contribute to the Flare Publishing Plugins can be found i
 Introduces standard behavior for Maven Publications where compile configuration dependencies are assigned the compile scope in generate POM files
 
 See the [usage documentation](./doc/pom-scope-correction.md) for information and requirements for applying the plug-in
+
+### org.starchartlabs.flare.source-jars
+
+Introduces standard behavior for generating "sources" and "javadoc" jars
+
+See the [usage documentation](./doc/source-jars.md) for information and requirements for applying the plug-in
