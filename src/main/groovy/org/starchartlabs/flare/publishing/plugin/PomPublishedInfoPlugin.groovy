@@ -1,0 +1,120 @@
+package org.starchartlabs.flare.publishing.plugin
+
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.api.publish.maven.MavenPublication
+import org.starchartlabs.flare.publishing.model.PublishedInfo
+
+/**
+ * Plug-in which modifies MavenPublication instances to add information from the publishedInfo configuration extension
+ *
+ * @author romeara
+ * @since 0.1.0
+ */
+public class PomPublishedInfoPlugin implements Plugin<Project> {
+
+    @Override
+    public void apply(Project project) {
+        //maven-publish: Provides publishing configuration
+        //org.starchartlabs.flare.published-info-base: Applies publishedInfo extension
+        project.apply plugin: 'maven-publish'
+        project.apply plugin: 'org.starchartlabs.flare.published-info-base'
+
+        PublishedInfo publishedInfo = project.extensions.publishedInfo
+
+        //Find all MavenPublications, and add a correction to compile dependencies to be of compile scope
+        project.publishing{
+            publications.withType(MavenPublication.class).all{ pub ->
+                addProjectInfo(project, publishedInfo, pub)
+                addScmInfo(project, publishedInfo, pub)
+                addLicenseInfo(project, publishedInfo, pub)
+                addDeveloperInfo(project, publishedInfo, pub)
+            }
+        }
+    }
+
+    /**
+     * Adds project information to the generated POM
+     * @param project The project the plug-in is being applied to
+     * @param info The published information to apply project information from
+     * @param pub The publication the project information is being added to
+     */
+    private void addProjectInfo(Project project, PublishedInfo info, MavenPublication pub){
+        if(info.url != null){
+            pub.pom.withXml {
+                asNode().appendNode('url', "${info.url}")
+            }
+        }
+    }
+
+    /**
+     * Adds scm information to the generated POM
+     * @param project The project the plug-in is being applied to
+     * @param info The published information to apply scm information from
+     * @param pub The publication the scm information is being added to
+     */
+    private void addScmInfo(Project project, PublishedInfo info, MavenPublication pub){
+        if(info.scm.url != null || info.scm.connection != null || info.scm.developerConnection != null){
+            pub.pom.withXml {
+                Node scmNode = asNode().appendNode('scm')
+
+                if(info.scm.url != null){
+                    scmNode.appendNode('url', "${info.scm.url}")
+                }
+
+                if(info.scm.connection != null){
+                    scmNode.appendNode('connection', "${info.scm.connection}")
+                }
+
+                if(info.scm.developerConnection != null){
+                    scmNode.appendNode('developerConnection', "${info.scm.developerConnection}")
+                }
+            }
+        }
+    }
+
+    /**
+     * Adds license information to the generated POM
+     * @param project The project the plug-in is being applied to
+     * @param info The published information to apply license information from
+     * @param pub The publication the license information is being added to
+     */
+    private void addLicenseInfo(Project project, PublishedInfo info, MavenPublication pub){
+        if(!info.licenses.isEmpty()){
+            pub.pom.withXml {
+                Node licensesNode = asNode().appendNode('licenses')
+
+                info.licenses.each { lic ->
+                    Node licenseNode = licensesNode.appendNode('license')
+
+                    licenseNode.appendNode('name', "${lic.name}")
+                    licenseNode.appendNode('url', "${lic.url}")
+                    licenseNode.appendNode('distribution', "${lic.distribution}")
+                }
+            }
+        }
+    }
+
+    /**
+     * Adds developer information to the generated POM
+     * @param project The project the plug-in is being applied to
+     * @param info The published information to apply developer information from
+     * @param pub The publication the developer information is being added to
+     */
+    private void addDeveloperInfo(Project project, PublishedInfo info, MavenPublication pub){
+        if(!info.developers.isEmpty()){
+            pub.pom.withXml {
+                Node developersNode = asNode().appendNode('developers')
+
+                info.developers.each{ dev ->
+                    Node developerNode = developersNode.appendNode('developer')
+
+                    developerNode.appendNode('id', "${dev.id}")
+                    developerNode.appendNode('name', "${dev.name}")
+                    developerNode.appendNode('url', "${dev.url}")
+                }
+            }
+        }
+    }
+
+}

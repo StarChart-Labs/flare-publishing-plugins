@@ -9,6 +9,7 @@
     * [org.starchartlabs.flare.source-jars](#org.starchartlabs.flare.source-jars)
     * [org.starchartlabs.flare.published-info-base](#org.starchartlabs.flare.published-info-base)
     * [org.starchartlabs.flare.pom-source-jar-artifacts](#org.starchartlabs.flare.pom-source-jar-artifacts)
+    * [org.starchartlabs.flare.pom-published-info](#org.starchartlabs.flare.pom-published-info)
 
 ## Legal
 
@@ -45,3 +46,9 @@ See the [usage documentation](./doc/published-info-base.md) for information and 
 Introduces standard behavior for sources and JavaDoc artifacts in MavenPublications
 
 See the [usage documentation](./doc/pom-source-jar-artifacts.md) for information and requirements for applying the plug-in
+
+### org.starchartlabs.flare.pom-published-info
+
+Introduces standard behavior for POM information MavenPublications
+
+See the [usage documentation](./doc/pom-published-info.md) for information and requirements for applying the plug-in
