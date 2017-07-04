@@ -8,6 +8,7 @@
     * [org.starchartlabs.flare.pom-scope-correction](#org.starchartlabs.flare.pom-scope-correction)
     * [org.starchartlabs.flare.source-jars](#org.starchartlabs.flare.source-jars)
     * [org.starchartlabs.flare.published-info-base](#org.starchartlabs.flare.published-info-base)
+    * [org.starchartlabs.flare.pom-source-jar-artifacts](#org.starchartlabs.flare.pom-source-jar-artifacts)
 
 ## Legal
 
@@ -38,3 +39,9 @@ See the [usage documentation](./doc/source-jars.md) for information and requirem
 Introduces a standard configuration extension `publishedInfo` for specifying published project values
 
 See the [usage documentation](./doc/published-info-base.md) for information and requirements for applying the plug-in
+
+### org.starchartlabs.flare.pom-source-jar-artifacts
+
+Introduces standard behavior for sources and JavaDoc artifacts in MavenPublications
+
+See the [usage documentation](./doc/pom-source-jar-artifacts.md) for information and requirements for applying the plug-in

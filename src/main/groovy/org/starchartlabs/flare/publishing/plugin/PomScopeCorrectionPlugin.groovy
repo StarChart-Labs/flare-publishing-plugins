@@ -19,15 +19,16 @@ public class PomScopeCorrectionPlugin implements Plugin<Project> {
 
         //Find all MavenPublications, and add a correction to compile dependencies to be of compile scope
         project.publishing{
-            publications.withType(MavenPublication.class).all{ pub -> updateScope(pub) }
+            publications.withType(MavenPublication.class).all{ pub -> updateScope(project, pub) }
         }
     }
 
     /**
      * Updates the scope of any compile class path dependencies to the Maven compile scope
+     * @param project The project the plug-in is being applied to
      * @param pub Representation of the MavenPublication being processed
      */
-    private void updateScope(MavenPublication pub){
+    private void updateScope(Project project, MavenPublication pub){
         pub.pom.withXml {
             project.configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
                 asNode().dependencies[0].dependency.find {
