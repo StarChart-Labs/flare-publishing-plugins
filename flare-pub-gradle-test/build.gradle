@@ -23,23 +23,35 @@ subprojects{
     apply plugin: 'nebula.maven-dependencies'
     apply plugin: 'org.starchartlabs.flare.pom-scope-correction'
     apply plugin: 'org.starchartlabs.flare.source-jars'
+    apply plugin: 'org.starchartlabs.flare.published-info-base'
+    
+    publishedInfo{
+        url 'http://something'
+        
+        scm{
+            github 'StarChart-Labs', 'flare'
+        }
+        
+        licenses{
+            mit 'repo'
+        }
+        
+        developers{
+            github 'romeara', "Ryan O'Meara"
+        }
+    }
+    
+    println publishedInfo.url
+    println publishedInfo.scm.url
+    println publishedInfo.scm.connection
+    println publishedInfo.scm.developerConnection
+    publishedInfo.licenses.each{println it.name}
+    publishedInfo.developers.each{println it.id}
+    
     
     publishing {
         repositories {
             mavenLocal()
-        }
-        publications {
-            nebula(MavenPublication) {
-
-//                pom.withXml {
-//                    configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
-//                        asNode().dependencies[0].dependency.find {
-//                            it.artifactId[0].text() == dep.moduleName &&
-//                            it.groupId[0].text() == dep.moduleGroup
-//                        }?.scope[0]?.value = 'compile'
-//                    }
-//                }
-            }
         }
     }
 }
