@@ -45,7 +45,7 @@ public class Developer{
         closure()
 
         return this
-    }
+    }
     /**
      * @return The unique ID of the developer in the SCM
      * @since 0.1.0
