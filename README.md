@@ -4,7 +4,9 @@
 
 * [Legal](#legal)
 * [Contributing](#contributing)
+* [Recommended Usage](#recommendedusage)
 * [Plugins](#plugins)
+    * [org.starchartlabs.flare.published-project](#org.starchartlabs.flare.published-project)
     * [org.starchartlabs.flare.pom-scope-correction](#org.starchartlabs.flare.pom-scope-correction)
     * [org.starchartlabs.flare.source-jars](#org.starchartlabs.flare.source-jars)
     * [org.starchartlabs.flare.published-info-base](#org.starchartlabs.flare.published-info-base)
@@ -21,7 +23,17 @@ The requirement for a copy of the license being included in distributions is ful
 
 Information for how to contribute to the Flare Publishing Plugins can be found in [the contribution guidelines](CONTRIBUTING.md)
 
+## Recommended Usage
+
+It is recommended projects apply the `org.starchartlabs.flare.published-project` to any modules which will be externally published to binary repositories - this plug-in contains all the behavior available in the other individual plug-ins
+
 ## Plug-ins
+
+### org.starchartlabs.flare.published-project
+
+Introduces standard behavior for Maven Publications via the individual plug-ins detailed below
+
+See the [usage documentation](./doc/published-project.md) for information and requirements for applying the plug-in
 
 ### org.starchartlabs.flare.pom-scope-correction
 

@@ -21,9 +21,7 @@ subprojects{
     apply plugin: 'maven-publish'
     apply plugin: 'nebula.maven-base-publish'
     apply plugin: 'nebula.maven-dependencies'
-    apply plugin: 'org.starchartlabs.flare.pom-scope-correction'
-    apply plugin: 'org.starchartlabs.flare.pom-source-jar-artifacts'
-    apply plugin: 'org.starchartlabs.flare.pom-published-info'
+    apply plugin: 'org.starchartlabs.flare.published-project'
     
     publishedInfo{
         url 'http://something'
