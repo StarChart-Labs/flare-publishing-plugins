@@ -64,3 +64,7 @@ See the [usage documentation](./doc/pom-source-jar-artifacts.md) for information
 Introduces standard behavior for POM information MavenPublications
 
 See the [usage documentation](./doc/pom-published-info.md) for information and requirements for applying the plug-in
+
+## Collaborators
+
+Information for collaborators, including the release process, can be found in the [collaborator documention](./COLLABORATORS.md)
