@@ -17,13 +17,7 @@ We welcome any contributions! If you wish to contribute:
 
 Currently, Eclipse is the supported IDE for development of flare-publishing-plugins. The Buildship plug-in is used to import projects via Gradle.
 
-It is recommended to create an isolated workspace for StarChart Labs projects. You should also import the standard StarChart Labs formatting and save settings from eclipseConfiguration:
-
-- `Java > CodeStyle > Cleanup` is imported from cleanup.xml
-- `Java > CodeStyle > Formatter` is imported from codeformatter.xml
-- `Java > CodeStyle > Code Templates` is imported from codetemplates.xml
-
-It is also recommended to turn on "save actions", under the Java Editor settings, to format saved lines and perform other cleanup operations
+It is recommended to create an isolated workspace for StarChart Labs projects. You should also import the standard StarChart Labs formatting and save settings from the [eclipse-configuration repository](https://github.com/StarChart-Labs/eclipse-configuration)
 
 In addition to the standard Java setup for Eclipse, you may wish to install Groovy support
 
