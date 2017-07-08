@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2017 The StarChart-Labs@github.com Authors
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
 package org.starchartlabs.flare.publishing.model
 
 /**
@@ -45,7 +51,7 @@ public class Developer{
         closure()
 
         return this
-    }
+    }
     /**
      * @return The unique ID of the developer in the SCM
      * @since 0.1.0
