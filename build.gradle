@@ -27,7 +27,7 @@ apply plugin: 'org.starchartlabs.flare.published-project'
 description = 'Gradle plug-ins to enhance publishing operations such as jar and POM generation'
 
 dependencyRecommendations {
-    dependencyLock file: file("${rootDir}/dependencies.lock")
+        propertiesFile file: file("${rootDir}/dependencies.properties")
 }
 
 //Default all projects to a synchronized IDE version number
@@ -48,7 +48,7 @@ repositories {
     jcenter()
 }
 
-//Dependency versions managed in $rootDir/dependencies.lock
+//Dependency versions managed in $rootDir/dependencies.properties
 dependencies {
     compile gradleApi()
     compile localGroovy()
