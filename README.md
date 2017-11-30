@@ -12,6 +12,8 @@
     * [org.starchartlabs.flare.published-info-base](#org.starchartlabs.flare.published-info-base)
     * [org.starchartlabs.flare.pom-source-jar-artifacts](#org.starchartlabs.flare.pom-source-jar-artifacts)
     * [org.starchartlabs.flare.pom-published-info](#org.starchartlabs.flare.pom-published-info)
+    * [org.starchartlabs.flare.docker-base](#org.starchartlabs.flare.docker-base)
+    * [org.starchartlabs.flare.docker-build](#org.starchartlabs.flare.docker-build)
 
 ## Legal
 
@@ -64,6 +66,18 @@ See the [usage documentation](./doc/pom-source-jar-artifacts.md) for information
 Introduces standard behavior for POM information MavenPublications
 
 See the [usage documentation](./doc/pom-published-info.md) for information and requirements for applying the plug-in
+
+### org.starchartlabs.flare.docker-base
+
+Introduces a standard configuration extension `containers` for specifying docker container values
+
+See the [usage documentation](./doc/docker-base.md) for information and requirements for applying the plug-in
+
+### org.starchartlabs.flare.docker-build
+
+Introduces a standard configuration of tasks for `containers` for building docker containers
+
+See the [usage documentation](./doc/docker-build.md) for information and requirements for applying the plug-in
 
 ## Collaborators
 
