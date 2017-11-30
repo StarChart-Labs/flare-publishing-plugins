@@ -16,7 +16,7 @@ public class TestClass {
 
     @Test
     public void test() throws Exception {
-        TestTarget.doNothing();
+        TestTarget.main(new String[]{});
     }
 
 }

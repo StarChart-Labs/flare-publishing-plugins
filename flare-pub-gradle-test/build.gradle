@@ -5,12 +5,15 @@ buildscript {
     }
     dependencies {
         classpath group: 'com.netflix.nebula', name: 'nebula-publishing-plugin', version: '4.2.0'
-        classpath group: 'org.starchartlabs.flare', name: 'flare-publishing-plugins', version: '0.1.0-SNAPSHOT', changing: true
+        classpath group: 'org.starchartlabs.flare', name: 'flare-publishing-plugins', version: '0.2.0-SNAPSHOT', changing: true
     }
 }
 
 allprojects{
     apply plugin: 'java'
+    
+    group='org.starchartlabs.flare.test'
+    version='0.1.0'
     
     repositories{
         mavenCentral()

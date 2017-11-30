@@ -1,3 +1,18 @@
+apply plugin: 'org.starchartlabs.flare.docker-build'
+
 dependencies{
     compile group: 'org.testng', name: 'testng', version: '6.9.10'
 }
+
+containers {
+    main {
+        baseName="${project.group}/${project.name}"
+        contents {
+            from ( "${projectDir}/src/main/dist" ) { into '' }
+            from (configurations.runtime) { into 'libs' }
+            from (jar) { into 'libs' }
+        }
+    }
+}
+
+containers.forEach{c -> println "${c.name}:${c.baseName}"}
