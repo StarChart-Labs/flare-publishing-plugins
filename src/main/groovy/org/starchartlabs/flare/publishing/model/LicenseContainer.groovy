@@ -79,6 +79,15 @@ public class LicenseContainer {
     }
 
     /**
+     * Adds the Apache 2.0 license to the licenses the project may be used under
+     * @param distribution The distribution method ("repo" or "manual") the project may use with this license
+     * @since 0.2.1
+     */
+    public void apache2(String distribution) {
+        licenses.add(new License('The Apache Software License, Version 2.0', 'Apache 2.0', 'http://www.apache.org/licenses/LICENSE-2.0.txt', distribution))
+    }
+
+    /**
      * Adds the MIT license to the licenses the project may be used under
      * @param distribution The distribution method ("repo" or "manual") the project may use with this license
      * @since 0.1.0
