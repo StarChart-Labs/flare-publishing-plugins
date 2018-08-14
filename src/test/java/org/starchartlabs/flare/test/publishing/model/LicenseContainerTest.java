@@ -81,6 +81,24 @@ public class LicenseContainerTest {
     }
 
     @Test
+    public void addApache2License() throws Exception {
+        LicenseContainer result = new LicenseContainer();
+
+        result.apache2("distribution");
+
+        Assert.assertNotNull(result.getLicenses());
+        Assert.assertEquals(result.getLicenses().size(), 1);
+
+        License license = result.getLicenses().stream().findAny().orElse(null);
+
+        Assert.assertNotNull(license);
+        Assert.assertEquals(license.getName(), "The Apache Software License, Version 2.0");
+        Assert.assertEquals(license.getTag(), "Apache 2.0");
+        Assert.assertEquals(license.getUrl(), "http://www.apache.org/licenses/LICENSE-2.0.txt");
+        Assert.assertEquals(license.getDistribution(), "distribution");
+    }
+
+    @Test
     public void addMitLicense() throws Exception {
         LicenseContainer result = new LicenseContainer();
 
