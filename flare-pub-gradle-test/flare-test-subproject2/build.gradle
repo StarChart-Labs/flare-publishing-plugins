@@ -12,7 +12,13 @@ containers {
             from (configurations.runtime) { into 'libs' }
             from (jar) { into 'libs' }
         }
+        labels (
+            "label1": "one",
+            "label2": "two"
+        )
     }
 }
 
 containers.forEach{c -> println "${c.name}:${c.baseName}"}
+
+build.dependsOn buildContainer
