@@ -40,6 +40,14 @@ public class ContainerBuildTask extends Exec {
         currentArgs.add("--tag=${container.baseName}:${project.version}")
         currentArgs.add("${container.path}")
 
+        if(container.getLabels() != null && !container.getLabels().isEmpty()) {
+            container.getLabels().entrySet()
+                    .forEach{e ->
+                        currentArgs.add("--label")
+                        currentArgs.add("\"${e.key}=${e.value}\"")
+                    }
+        }
+
         setArgs(currentArgs)
 
         logger.lifecycle("Command: ${executable}")

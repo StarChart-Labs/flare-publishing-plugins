@@ -23,7 +23,7 @@ apply plugin: 'org.starchartlabs.flare.docker-build'
 
 ### Per-Container tasks
 
-For an example configuration:
+For an example configuration (see [docker-base plug-in documentation](./docker-base.md) for more details on the `containers` DSL):
 
 ```
 containers{

@@ -21,7 +21,7 @@ apply plugin: 'org.starchartlabs.flare.docker-base'
 
 ## Use
 
-To specify docker container information, the DSL breaks down into 3 parts:
+To specify docker container information, the DSL breaks down into 4 parts:
 
 ```
 containers{
@@ -33,6 +33,10 @@ containers{
           from (configurations.runtime) { into 'libs' }
           from (jar) { into 'libs' }
         }
+        labels (
+            "label1": "one",
+            "label2": "two"
+        )
     }
 }
 ```
@@ -66,3 +70,14 @@ contents{
 ```
 
 Defines the file resources to make available the docker build process. "into" directories are relative to the path defined in the container
+
+### labels
+
+```
+labels (
+    "label1": "one",
+    "label2": "two"
+)
+```
+
+Defines Docker labels to apply to the built container as meta-data. Translates to command arguments `--label "label1=one" --label "label2=two"`

@@ -27,11 +27,14 @@ public class DockerContainerSpec implements Named {
 
     private File path
 
+    private Map<String, String> labels
+
     public DockerContainerSpec(String name, CopySpec contents, Project project){
         this.name = name
         this.baseName = "${project.name}/${name}"
         this.contents = contents
         this.path = new File(project.getBuildDir(), "containers/${name}")
+        this.labels = new HashMap<>()
     }
 
     @Override
@@ -87,5 +90,32 @@ public class DockerContainerSpec implements Named {
     public CopySpec contents(Action<? super CopySpec> action){
         action.execute(contents)
         return contents
+    }
+
+    /**
+     * @return labels Additional Docker labels to add to the built image
+     * @since 0.3.0
+     */
+    public Map<String, String> getLabels(){
+        return labels
+    }
+
+    /**
+     * @param labels Additional Docker labels to add to the built image
+     * @since 0.3.0
+     */
+    public void setLabels(Map<String, String> labels) {
+        this.labels = labels
+    }
+
+    /**
+     * @param labels Additional Docker labels to add to the built image
+     * @return The configured labels
+     * @since 0.3.0
+     */
+    public Map<String, String> labels(Map<String, String> labels){
+        this.labels.putAll(labels)
+
+        return labels
     }
 }
