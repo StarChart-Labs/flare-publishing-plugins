@@ -36,11 +36,13 @@ containers{
 Which has a container of name "main", the build plug-in will apply two tasks:
 
 - assembleMainContainer (`assemble${container.name.captialize}Container`)
-  - Copys files specified in the contents of the container to the output path
+  - Copies files specified in the contents of the container to the output path
 - buildMainContainer (`build${container.name.captialize}Container`)
   - Runs the `docker build` command within the output directory
   - Depends on the `assembleMainContainer` task
-
+- cleanMainContainer (`clean${container.name.captialize}Container`)
+  - Runs the `docker rmi` command for the specified container
+  
 ### Project Level tasks
 
 Aside from the per-container tasks, the plug-in applies two other tasks:
@@ -49,3 +51,7 @@ Aside from the per-container tasks, the plug-in applies two other tasks:
   - Depends on all per-container assemble tasks, assembling all specified containers
 - buildContainer
   - Depends on all per-container build tasks, building all specified containers
+  - Is set as a dependency of the `base` plug-in `assemble` task
+- cleanContainer
+  - Depends on all per-container clean tasks, cleaning all specified container images
+  - Is set as a dependency of the `base` plug-in `clean` task
