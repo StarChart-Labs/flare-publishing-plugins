@@ -46,4 +46,10 @@ public class DockerBuildPluginTest {
         Assert.assertNotNull(task);
     }
 
+    @Test
+    public void cleanContainerTaskAdded() throws Exception {
+        Task task = project.getTasks().getByName("cleanContainer");
+        Assert.assertNotNull(task);
+    }
+
 }

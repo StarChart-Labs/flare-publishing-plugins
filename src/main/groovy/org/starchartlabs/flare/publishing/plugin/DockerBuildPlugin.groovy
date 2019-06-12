@@ -17,6 +17,7 @@ import org.gradle.api.tasks.Sync
 import org.gradle.internal.reflect.Instantiator
 import org.starchartlabs.flare.publishing.model.DockerContainerSpec
 import org.starchartlabs.flare.publishing.task.ContainerBuildTask
+import org.starchartlabs.flare.publishing.task.ContainerCleanTask
 
 /**
  * Configuration plug-in which adds assembly and build tasks for defined docker containers
@@ -36,16 +37,25 @@ public class DockerBuildPlugin implements Plugin<Project> {
 
         Task assembleAllTask = project.getTasks().create('assembleContainer');
         Task buildAllTask = project.getTasks().create('buildContainer');
+        Task cleanAllTask = project.getTasks().create('cleanContainer');
 
         project.containers.all({
             Task assembleTask = configureAssembleTask(project, it)
             Task buildTask = configureBuildTask(project, it)
+            Task cleanTask = configureCleanTask(project, it)
 
             buildTask.dependsOn assembleTask
 
             assembleAllTask.dependsOn assembleTask
             buildAllTask.dependsOn buildTask
+            cleanAllTask.dependsOn cleanTask
         } as Action)
+
+        // When the base plug-in is applied, attach to the assemble and clean tasks
+        project.pluginManager.withPlugin('base', {plugin ->
+            project.tasks.assemble.dependsOn buildAllTask
+            project.tasks.clean.dependsOn cleanAllTask
+        });
     }
 
     /**
@@ -63,7 +73,7 @@ public class DockerBuildPlugin implements Plugin<Project> {
     }
 
     /**
-     * Sets up a task which will run the "docker build" command within a directory assembled to contain various resources for incluion in the container
+     * Sets up a task which will run the "docker build" command within a directory assembled to contain various resources for inclusion in the container
      * @param project The project the task is being added to
      * @param container Data structure describing the container the task will build
      * @return The created task for building a docker container
@@ -74,4 +84,18 @@ public class DockerBuildPlugin implements Plugin<Project> {
 
         return buildTask
     }
+
+    /**
+     * Sets up a task which will run the "docker rmi" command to remove a built container
+     * @param project The project the task is being added to
+     * @param container Data structure describing the container the task will remove
+     * @return The created task for removing a docker container
+     */
+    private Task configureCleanTask(Project project, DockerContainerSpec container){
+        ContainerCleanTask cleanTask = project.getTasks().create("clean${container.name.capitalize()}Container", ContainerCleanTask.class);
+        cleanTask.container = container
+
+        return cleanTask
+    }
+
 }

@@ -30,7 +30,7 @@ public class ContainerBuildTask extends Exec {
         this.container = container
     }
 
-    public File getContainer(){
+    public DockerContainerSpec getContainer(){
         return container
     }
 
