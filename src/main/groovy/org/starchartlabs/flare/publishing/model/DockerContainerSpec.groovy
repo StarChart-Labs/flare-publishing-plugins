@@ -27,6 +27,8 @@ public class DockerContainerSpec implements Named {
 
     private File path
 
+    private String dockerFile
+
     private Map<String, String> labels
 
     public DockerContainerSpec(String name, CopySpec contents, Project project){
@@ -35,6 +37,7 @@ public class DockerContainerSpec implements Named {
         this.contents = contents
         this.path = new File(project.getBuildDir(), "containers/${name}")
         this.labels = new HashMap<>()
+        this.dockerFile = null
     }
 
     @Override
@@ -90,6 +93,22 @@ public class DockerContainerSpec implements Named {
     public CopySpec contents(Action<? super CopySpec> action){
         action.execute(contents)
         return contents
+    }
+
+    /**
+     * @return Path to the docker file to build against (relative to the root of the constructed contents directory). If unspecified (null), docker build's default is used
+     * @since 0.3.0
+     */
+    public String getDockerFile() {
+        return dockerFile
+    }
+
+    /**
+     * @param dockerFile Path to the docker file to build against (relative to the root of the constructed contents directory). If unspecified (null), docker build's default is used
+     * @since 0.3.0
+     */
+    public void setDockerFile(String dockerFile) {
+        this.dockerFile = dockerFile
     }
 
     /**
