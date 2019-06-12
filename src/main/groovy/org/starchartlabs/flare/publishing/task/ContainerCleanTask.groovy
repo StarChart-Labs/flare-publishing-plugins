@@ -10,20 +10,32 @@ import org.gradle.api.tasks.Exec
 import org.starchartlabs.flare.publishing.model.DockerContainerSpec
 
 /**
- * Task configured to run a <a href="https://docs.docker.com/engine/reference/commandline/build/">docker build command</a> on a specified directory
+ * Task configured to run a <a href="https://docs.docker.com/engine/reference/commandline/build/">docker rmi command</a> on a specified directory
  *
  * @author romeara
- * @since 0.2.0
+ * @since 0.3.0
  */
 @SuppressWarnings("unchecked")
-public class ContainerBuildTask extends Exec {
+public class ContainerCleanTask extends Exec {
 
     private DockerContainerSpec container
 
-    public ContainerBuildTask(){
+    public ContainerCleanTask(){
         super()
 
-        configure{ executable 'docker' }
+        configure{
+            executable 'docker'
+
+            ignoreExitValue true
+
+            doLast {
+                if(execResult.exitValue == 0) {
+                    project.logger.lifecycle("Removed image ${container.baseName}:${project.version}")
+                } else {
+                    project.logger.lifecycle("No existing image ${container.baseName}:${project.version} to remove (${execResult.exitValue})")
+                }
+            }
+        }
     }
 
     public void setContainer(DockerContainerSpec container){
@@ -36,17 +48,9 @@ public class ContainerBuildTask extends Exec {
 
     protected void exec(){
         List<String> currentArgs = getArgs()
-        currentArgs.add(0, 'build')
-        currentArgs.add("--tag=${container.baseName}:${project.version}")
-        currentArgs.add("${container.path}")
-
-        if(container.getLabels() != null && !container.getLabels().isEmpty()) {
-            container.getLabels().entrySet()
-                    .forEach{e ->
-                        currentArgs.add("--label")
-                        currentArgs.add("\"${e.key}=${e.value}\"")
-                    }
-        }
+        currentArgs.add(0, 'rmi')
+        currentArgs.add('-f')
+        currentArgs.add("${container.baseName}:${project.version}")
 
         setArgs(currentArgs)
 
