@@ -21,18 +21,23 @@ apply plugin: 'org.starchartlabs.flare.docker-base'
 
 ## Use
 
-To specify docker container information, the DSL breaks down into 4 parts:
+To specify docker container information, the DSL breaks down into 5 parts:
 
 ```
 containers{
     main{
         baseName='container/name'
+        
         path=file("${buildDir}/location")
+        
         contents{
           from ( "${projectDir}/src/main/resources" ) { into '' }
           from (configurations.runtime) { into 'libs' }
           from (jar) { into 'libs' }
         }
+        
+        dockerFile='DockerFile'
+        
         labels (
             "label1": "one",
             "label2": "two"
@@ -70,6 +75,14 @@ contents{
 ```
 
 Defines the file resources to make available the docker build process. "into" directories are relative to the path defined in the container
+
+### dockerFile
+
+```
+dockerFile='DockerFile'
+```
+
+Allows specifying a non-default DockerFile for use with the `docker build` command
 
 ### labels
 

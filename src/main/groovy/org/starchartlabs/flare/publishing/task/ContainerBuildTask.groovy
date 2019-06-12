@@ -37,6 +37,12 @@ public class ContainerBuildTask extends Exec {
     protected void exec(){
         List<String> currentArgs = getArgs()
         currentArgs.add(0, 'build')
+
+        if(container.getDockerFile() != null) {
+            currentArgs.add('-f')
+            currentArgs.add(container.getDockerFile())
+        }
+
         currentArgs.add("--tag=${container.baseName}:${project.version}")
         currentArgs.add("${container.path}")
 
