@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - GH-17 Add DSL and task support for building with Docker labels applied
+- GH-7 Add ability to specify non-default DockerFile for docker build command
 
 ## [0.2.0]
 ### Added
