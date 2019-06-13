@@ -24,6 +24,9 @@ public class ContainerCleanTask extends Exec {
         super()
 
         configure{
+            group = 'Build'
+            description = 'Runs docker rmi to remove an image'
+
             executable 'docker'
 
             ignoreExitValue true
@@ -40,6 +43,10 @@ public class ContainerCleanTask extends Exec {
 
     public void setContainer(DockerContainerSpec container){
         this.container = container
+
+        if(container != null) {
+            description = "Runs docker rmi to remove an image described by the ${container.name} specification"
+        }
     }
 
     public DockerContainerSpec getContainer(){

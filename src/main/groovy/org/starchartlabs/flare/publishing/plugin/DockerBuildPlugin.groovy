@@ -39,6 +39,15 @@ public class DockerBuildPlugin implements Plugin<Project> {
         Task buildAllTask = project.getTasks().create('buildContainer');
         Task cleanAllTask = project.getTasks().create('cleanContainer');
 
+        assembleAllTask.group = 'Build'
+        assembleAllTask.description = 'Assemble files for building all images specified in the containers DSL'
+
+        buildAllTask.group = 'Build'
+        buildAllTask.description = 'Generates container images specified in the containers DSL'
+
+        cleanAllTask.group = 'Build'
+        cleanAllTask.description = 'Removes container images specified in the containers DSL'
+
         project.containers.all({
             Task assembleTask = configureAssembleTask(project, it)
             Task buildTask = configureBuildTask(project, it)
@@ -68,6 +77,9 @@ public class DockerBuildPlugin implements Plugin<Project> {
         Sync installTask = project.getTasks().create("assemble${container.name.capitalize()}Container", Sync.class);
         installTask.with(container.getContents());
         installTask.into({ return container.getPath() } as Callable);
+
+        installTask.group = 'Build'
+        installTask.description = "Assembles files for use with docker build to generate an image from the ${container.name} specification"
 
         return installTask
     }

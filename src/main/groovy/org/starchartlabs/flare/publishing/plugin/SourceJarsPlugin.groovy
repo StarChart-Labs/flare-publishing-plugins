@@ -27,12 +27,18 @@ public class SourceJarsPlugin implements Plugin<Project> {
         Jar javadocJarTask = project.getTasks().create('javadocJar', Jar.class);
 
         sourcesJarTask.configure{
+            group = 'Build'
+            description = 'Creates a jar containing the source code of the project'
+
             classifier = 'sources'
             from project.sourceSets.main.allSource
             dependsOn project.tasks.classes
         }
 
         javadocJarTask.configure{
+            group = 'Build'
+            description = 'Creates a jar containing the javadoc of the project'
+
             classifier = 'javadoc'
             from project.javadoc.destinationDir
             dependsOn project.tasks.javadoc
