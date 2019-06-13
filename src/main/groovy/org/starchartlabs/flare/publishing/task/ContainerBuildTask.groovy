@@ -23,11 +23,20 @@ public class ContainerBuildTask extends Exec {
     public ContainerBuildTask(){
         super()
 
-        configure{ executable 'docker' }
+        configure{
+            group = 'Build'
+            description = 'Runs docker build to generate a container'
+
+            executable 'docker'
+        }
     }
 
     public void setContainer(DockerContainerSpec container){
         this.container = container
+
+        if(container != null) {
+            description = "Runs docker build to generate a container as described by the ${container.name} specification"
+        }
     }
 
     public DockerContainerSpec getContainer(){

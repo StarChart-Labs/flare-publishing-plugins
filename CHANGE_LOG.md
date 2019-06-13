@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - GH-17 Add DSL and task support for building with Docker labels applied
 - GH-12 Add task for cleaning built docker images, and hook build/clean into base assemble/clean tasks
 - GH-7 Add ability to specify non-default DockerFile for docker build command
+- GH-15 Add group and description values for all contributed tasks
 
 ## [0.2.0]
 ### Added
