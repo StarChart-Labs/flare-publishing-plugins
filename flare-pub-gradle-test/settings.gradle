@@ -1,2 +1,3 @@
 include 'flare-test-subproject1'
 include 'flare-test-subproject2'
+include 'flare-test-subproject3'

@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - GH-12 Add task for cleaning built docker images, and hook build/clean into base assemble/clean tasks
 - GH-7 Add ability to specify non-default DockerFile for docker build command
 
+### Changed
+- GH-14 Fixed error which occurred on non-java Maven publications trying to reference dependency POM elements which don't exist
+
 ## [0.2.0]
 ### Added
 - Add a plug-in which integrates a Docker "distribution" into Gradle's established "distribution" plug-in pattern
