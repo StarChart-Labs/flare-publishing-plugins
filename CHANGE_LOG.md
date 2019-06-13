@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - GH-7 Add ability to specify non-default DockerFile for docker build command
 - GH-15 Add group and description values for all contributed tasks
 
+### Changed
+- GH-14 Fixed error which occurred on non-java Maven publications trying to reference dependency POM elements which don't exist
+
 ## [0.2.0]
 ### Added
 - Add a plug-in which integrates a Docker "distribution" into Gradle's established "distribution" plug-in pattern

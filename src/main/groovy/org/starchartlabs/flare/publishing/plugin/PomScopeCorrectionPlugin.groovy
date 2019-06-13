@@ -37,9 +37,11 @@ public class PomScopeCorrectionPlugin implements Plugin<Project> {
     private void updateScope(Project project, MavenPublication pub){
         pub.pom.withXml {
             project.configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
-                asNode().dependencies[0].dependency.find {
-                    it.artifactId[0].text() == dep.moduleName && it.groupId[0].text() == dep.moduleGroup
-                }?.scope[0]?.value = 'compile'
+                if(asNode().dependencies[0] != null) {
+                    asNode().dependencies[0].dependency.find {
+                        it.artifactId[0].text() == dep.moduleName && it.groupId[0].text() == dep.moduleGroup
+                    }?.scope[0]?.value = 'compile'
+                }
             }
 
             project.logger.info("Applying compile configuration correction to maven publication '${pub.name}'")

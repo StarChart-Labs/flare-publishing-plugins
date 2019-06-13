@@ -3,6 +3,7 @@
 ## Release Process
 
 * Run a full build via `./gradlew clean build`
+* Run a `publish` to deploy artifact locally for test project
 * Manually run a build and publish on the test project `flare-pub-gradle-test` to verify basic functionality in a real project setup
 * Update the version number to remove the "-SNAPSHOT" designation. All version numbers should be a fully-qualified semantic version of form `<major>.<minor>.<micro>`
 * Change the header "Unreleased" in CHANGE_LOG.md to the target release number, and create a new "Unreleased" header above it

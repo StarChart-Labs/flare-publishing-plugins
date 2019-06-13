@@ -1,0 +1,20 @@
+dependencies{
+    compile group: 'org.testng', name: 'testng', version: '6.9.10'
+}
+
+task someZipTypeTask(type: Zip) {
+    from "${projectDir}/src"
+    archiveName 'archive.zip'
+    destinationDir(file("${buildDir}/archive"))
+}
+
+assemble.dependsOn someZipTypeTask
+ 
+publishing {
+    publications {
+        zip(MavenPublication) {
+            artifactId = 'artifact-name'
+            artifact someZipTypeTask
+        }
+    }
+}
