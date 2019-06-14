@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.3.0]
 ### Added
 - GH-17 Add DSL and task support for building with Docker labels applied
 - GH-12 Add task for cleaning built docker images, and hook build/clean into base assemble/clean tasks
