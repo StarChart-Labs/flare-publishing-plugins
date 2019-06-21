@@ -6,8 +6,8 @@ buildscript {
         classpath group: 'com.netflix.nebula', name: 'nebula-dependency-recommender', version: '4.2.0'
         classpath group: 'com.netflix.nebula', name: 'nebula-publishing-plugin', version: '4.2.0'
         classpath group: 'com.jfrog.bintray.gradle', name: 'gradle-bintray-plugin', version: '1.7.3'
-        classpath group: 'org.starchartlabs.flare', name: 'flare-operations-plugins', version: '1.0.0'
-        classpath group: 'org.starchartlabs.flare', name: 'flare-publishing-plugins', version: '0.1.0'
+        classpath group: 'org.starchartlabs.flare', name: 'flare-operations-plugins', version: '2.0.0'
+        classpath group: 'org.starchartlabs.flare', name: 'flare-publishing-plugins', version: '0.3.0'
     }
 }
 
@@ -26,20 +26,17 @@ apply plugin: 'org.starchartlabs.flare.published-project'
 
 description = 'Gradle plug-ins to enhance publishing operations such as jar and POM generation'
 
-dependencyRecommendations {
-        propertiesFile file: file("${rootDir}/dependencies.properties")
-}
-
 //Default all projects to a synchronized IDE version number
 group = 'org.starchartlabs.flare'
 
-sourceCompatibility = "${javaVersion}"
+dependencyRecommendations {
+        propertiesFile file: file("${rootDir}/dependencies.properties")
+}
 
 //Always download sources, to allow debugging, and use Eclipse containers for greater portability
 eclipse {
     classpath {
         downloadSources=true
-        containers = [ 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8' ]
     }
 }
 
@@ -151,8 +148,4 @@ bintray {
             }
         }
     }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = "${gradleVersion}"
 }

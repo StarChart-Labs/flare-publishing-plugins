@@ -14,6 +14,8 @@
     * [org.starchartlabs.flare.pom-published-info](#org.starchartlabs.flare.pom-published-info)
     * [org.starchartlabs.flare.docker-base](#org.starchartlabs.flare.docker-base)
     * [org.starchartlabs.flare.docker-build](#org.starchartlabs.flare.docker-build)
+    
+For information on migrating between major plug-in versions, see the [migration guide](./docs/MIGRATIONS.md)
 
 ## Legal
 
@@ -24,6 +26,22 @@ The requirement for a copy of the license being included in distributions is ful
 ## Contributing
 
 Information for how to contribute to the Flare Publishing Plugins can be found in [the contribution guidelines](CONTRIBUTING.md)
+
+## Supported Gradle Versions
+
+### Gradle 3.2.1 through 3.5.1 (Inclusive)
+
+_Supported by plug-in version 0.x_
+
+### Gradle 4.x 
+
+_Supported by plug-in version 1.x_
+
+## Migrating Gradle Versions
+
+### Gradle 3.x to 4.x
+
+- Upgrade to plug-in version 1.x
 
 ## Recommended Usage
 
