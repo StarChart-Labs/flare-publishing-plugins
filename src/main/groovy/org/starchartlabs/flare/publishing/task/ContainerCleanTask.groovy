@@ -27,17 +27,29 @@ public class ContainerCleanTask extends Exec {
             group = 'Build'
             description = 'Runs docker rmi to remove an image'
 
-            executable 'docker'
+            onlyIf {
+                def result = project.exec {
+                    executable = 'docker'
 
-            ignoreExitValue true
+                    args = [
+                        'image',
+                        'inspect',
+                        "${container.baseName}:${project.version}",
+                        '--format',
+                        "\"{{.ID}}\""
+                    ]
 
-            doLast {
-                if(execResult.exitValue == 0) {
-                    project.logger.lifecycle("Removed image ${container.baseName}:${project.version}")
-                } else {
-                    project.logger.lifecycle("No existing image ${container.baseName}:${project.version} to remove (${execResult.exitValue})")
+                    ignoreExitValue = true
                 }
+
+                if(result.exitValue == 0) {
+                    project.logger.info("Skipping removal of container ${container.baseName}:${project.version} as it is not present (${result.exitValue})")
+                }
+
+                return result.exitValue == 0
             }
+
+            executable 'docker'
         }
     }
 

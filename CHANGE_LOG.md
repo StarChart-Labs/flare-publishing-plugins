@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - (GH-25) Update minimum required Gradle version to 4.0
+- (GH-24) Switch clean container tasks from ignoring error input to skipping based on docker images command 
 
 ## [0.3.0]
 ### Added
