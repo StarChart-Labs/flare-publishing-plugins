@@ -21,7 +21,7 @@ apply plugin: 'nebula.maven-base-publish'
 apply plugin: 'nebula.maven-dependencies'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.starchartlabs.flare.increase-test-logging'
-apply plugin: 'org.starchartlabs.flare.dependency-insight'
+apply plugin: 'org.starchartlabs.flare.dependency-reporting'
 apply plugin: 'org.starchartlabs.flare.published-project'
 
 description = 'Gradle plug-ins to enhance publishing operations such as jar and POM generation'
@@ -89,7 +89,7 @@ jacocoTestReport {
         xml.enabled true
         csv.enabled false
         html.enabled false
-        xml.destination "${buildDir}/reports/jacoco/report.xml"
+        xml.destination file("${buildDir}/reports/jacoco/report.xml")
     }
 }
 
