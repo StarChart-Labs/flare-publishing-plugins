@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.0.0]
 ### Changed
 - (GH-25) Update minimum required Gradle version to 4.0
 - (GH-24) Switch clean container tasks from ignoring error input to skipping based on docker images command 
