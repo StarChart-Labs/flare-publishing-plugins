@@ -3,11 +3,11 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath group: 'com.netflix.nebula', name: 'nebula-dependency-recommender', version: '4.2.0'
-        classpath group: 'com.netflix.nebula', name: 'nebula-publishing-plugin', version: '4.2.0'
-        classpath group: 'com.jfrog.bintray.gradle', name: 'gradle-bintray-plugin', version: '1.7.3'
-        classpath group: 'org.starchartlabs.flare', name: 'flare-operations-plugins', version: '2.0.0'
-        classpath group: 'org.starchartlabs.flare', name: 'flare-publishing-plugins', version: '0.3.0'
+        classpath 'com.netflix.nebula:nebula-dependency-recommender:4.2.0'
+        classpath 'com.netflix.nebula:nebula-publishing-plugin:4.2.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'org.starchartlabs.flare:flare-operations-plugins:2.0.0'
+        classpath 'org.starchartlabs.flare:flare-publishing-plugins:1.0.0'
     }
 }
 
@@ -30,37 +30,37 @@ description = 'Gradle plug-ins to enhance publishing operations such as jar and 
 group = 'org.starchartlabs.flare'
 
 dependencyRecommendations {
-        propertiesFile file: file("${rootDir}/dependencies.properties")
+    propertiesFile file: file("${rootDir}/dependencies.properties")
 }
 
-//Always download sources, to allow debugging, and use Eclipse containers for greater portability
+// Always download sources, to allow debugging, and use Eclipse containers for greater portability
 eclipse {
     classpath {
         downloadSources=true
     }
 }
 
-//JCenter is the Gradle plug-in standard
+// JCenter is the Gradle plug-in standard
 repositories {
     jcenter()
 }
 
-//Dependency versions managed in $rootDir/dependencies.properties
+// Dependency versions managed in $rootDir/dependencies.properties
 dependencies {
     compile gradleApi()
     compile localGroovy()
     
-    testCompile group: 'org.testng', name: 'testng'
+    testCompile 'org.testng:testng'
 }
 
-//Add LICENSE so it is included in all JARs, fulfilling the "distributions include license" requirement
+// Add LICENSE so it is included in all JARs, fulfilling the "distributions include license" requirement
 jar{
     from("${rootDir}"){
         include 'LICENSE'
     }
 }
 
-//All projects should provide source code and javadoc, and upload these with any released artifacts
+// All projects should provide source code and javadoc, and upload these with any released artifacts
 sourcesJar{
     from("${rootDir}"){
         include 'LICENSE'
@@ -73,7 +73,7 @@ javadocJar{
     }
 }
 
-//Setup default test behavior, including failure logging
+// Setup default test behavior, including failure logging
 test {
     useTestNG() {
         useDefaultListeners = true
@@ -96,7 +96,7 @@ jacocoTestReport {
 jacocoTestReport.dependsOn test
 check.dependsOn jacocoTestReport
 
-//If not a remote run, publish to local only
+// If not a remote run, publish to local only
 if(!project.hasProperty('remoteDeploy')){
     publishing {
         repositories {
@@ -105,7 +105,7 @@ if(!project.hasProperty('remoteDeploy')){
     }
 }
 
-publishedInfo{
+publishedInfo {
     url = 'https://github.com/Corona-IDE/flare-publishing-plugins'
   
     scm{
