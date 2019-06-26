@@ -37,11 +37,19 @@ _Supported by plug-in version 0.x_
 
 _Supported by plug-in version 1.x_
 
+### Gradle 5.x 
+
+_Supported by plug-in version 1.x and 2.x_
+
 ## Migrating Gradle Versions
 
 ### Gradle 3.x to 4.x
 
 - Upgrade to plug-in version 1.x
+
+### Gradle 4.x to 5.x
+
+- Upgrade to plug-in version 2.x
 
 ## Recommended Usage
 
