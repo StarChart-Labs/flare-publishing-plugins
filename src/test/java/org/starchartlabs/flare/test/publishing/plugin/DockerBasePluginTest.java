@@ -12,7 +12,6 @@ package org.starchartlabs.flare.test.publishing.plugin;
 
 import org.gradle.api.Project;
 import org.gradle.testfixtures.ProjectBuilder;
-import org.starchartlabs.flare.publishing.model.DockerContainerSpecContainer;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -34,7 +33,6 @@ public class DockerBasePluginTest {
         Object found = project.getExtensions().findByName("containers");
 
         Assert.assertNotNull(found);
-        Assert.assertTrue(found instanceof DockerContainerSpecContainer);
     }
 
 }

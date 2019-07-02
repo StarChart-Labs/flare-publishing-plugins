@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - (GH-30) Update minimum required Gradle version to 5.0
+- (GH-16) Simplified containers DSL setup to remove use of internal API, and by extension use of API deprecated in Gradle 5.0 
 
 ## [1.0.0]
 ### Changed
