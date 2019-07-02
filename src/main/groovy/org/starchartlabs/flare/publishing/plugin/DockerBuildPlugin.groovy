@@ -62,7 +62,7 @@ public class DockerBuildPlugin implements Plugin<Project> {
 
         // When the base plug-in is applied, attach to the assemble and clean tasks
         project.pluginManager.withPlugin('base', {plugin ->
-            project.tasks.assemble.dependsOn buildAllTask
+            project.tasks.assemble.dependsOn assembleAllTask
             project.tasks.clean.dependsOn cleanAllTask
         });
     }
