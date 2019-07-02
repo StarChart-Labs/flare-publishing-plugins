@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - (GH-30) Update minimum required Gradle version to 5.0
+- (GH-29) Switch from assemble depending on the container build task to depending on the container assemble task, which doesn't require docker and is more appropriate
 
 ## [1.0.0]
 ### Changed
 - (GH-25) Update minimum required Gradle version to 4.0
 - (GH-24) Switch clean container tasks from ignoring error input to skipping based on docker images command 
+- Add dependency on `buildContainer` task for default `assemble` task
 
 ## [0.3.0]
 ### Added
