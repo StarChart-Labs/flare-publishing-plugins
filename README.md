@@ -65,6 +65,8 @@ See the [usage documentation](./doc/published-project.md) for information and re
 
 ### org.starchartlabs.flare.pom-scope-correction
 
+*WARNING: org.starchartlabs.flare.pom-scope-correction is deprecated as of Gradle 5.0, as are the associated nebula plug-ins. It is recommended to switch to Gradle's built-in dependency contraint system*
+
 Introduces standard behavior for Maven Publications where compile configuration dependencies are assigned the compile scope in generate POM files
 
 See the [usage documentation](./doc/pom-scope-correction.md) for information and requirements for applying the plug-in
