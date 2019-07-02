@@ -10,10 +10,8 @@ import javax.inject.Inject
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.internal.file.FileOperations
 import org.gradle.internal.reflect.Instantiator
 import org.starchartlabs.flare.publishing.model.DockerContainerSpec
-import org.starchartlabs.flare.publishing.model.DockerContainerSpecContainer
 
 /**
  * Configuration plug-in that adds structures for defining docker containers to be assembled from artifacts and resources within a project
@@ -25,16 +23,17 @@ public class DockerBasePlugin implements Plugin<Project> {
 
     private final Instantiator instantiator
 
-    private final FileOperations fileOperations
-
     @Inject
-    public DockerBasePlugin(Instantiator instantiator, FileOperations fileOperations) {
+    public DockerBasePlugin(Instantiator instantiator) {
         this.instantiator = instantiator
-        this.fileOperations = fileOperations
     }
 
     @Override
     public void apply(Project project) {
-        project.getExtensions().create('containers', DockerContainerSpecContainer.class, DockerContainerSpec.class, instantiator, fileOperations, project);
+        def containers = project.container(DockerContainerSpec.class, { name ->
+            return new DockerContainerSpec(name, project)
+        })
+
+        project.extensions.add('containers', containers)
     }
 }

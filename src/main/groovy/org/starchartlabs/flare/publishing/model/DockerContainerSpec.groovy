@@ -31,10 +31,10 @@ public class DockerContainerSpec implements Named {
 
     private Map<String, String> labels
 
-    public DockerContainerSpec(String name, CopySpec contents, Project project){
+    public DockerContainerSpec(String name, Project project){
         this.name = name
         this.baseName = "${project.name}/${name}"
-        this.contents = contents
+        this.contents = project.copySpec()
         this.path = new File(project.getBuildDir(), "containers/${name}")
         this.labels = new HashMap<>()
         this.dockerFile = null
@@ -92,6 +92,18 @@ public class DockerContainerSpec implements Named {
      */
     public CopySpec contents(Action<? super CopySpec> action){
         action.execute(contents)
+        return contents
+    }
+
+    /**
+     * @param closure Operation to apply to the copy specification that defines files/resources to include in docker container construction
+     * @return The configured copy specification
+     * @since 2.0.0
+     */
+    public CopySpec contents(@DelegatesTo(DeveloperContainer) Closure closure) {
+        closure.delegate = contents
+        closure()
+
         return contents
     }
 

@@ -13,7 +13,6 @@ package org.starchartlabs.flare.test.publishing.model;
 import java.io.File;
 
 import org.gradle.api.Project;
-import org.gradle.api.file.CopySpec;
 import org.gradle.testfixtures.ProjectBuilder;
 import org.starchartlabs.flare.publishing.model.DockerContainerSpec;
 import org.testng.Assert;
@@ -31,12 +30,11 @@ public class DockerContainerSpecTest {
 
     @Test
     public void construct() throws Exception {
-        CopySpec copySpec = project.copySpec();
-        DockerContainerSpec result = new DockerContainerSpec("name", copySpec, project);
+        DockerContainerSpec result = new DockerContainerSpec("name", project);
 
         Assert.assertEquals(result.getName(), "name");
         Assert.assertEquals(result.getBaseName(), project.getName() + "/name");
-        Assert.assertEquals(result.getContents(), copySpec);
+        Assert.assertNotNull(result.getContents());
         Assert.assertEquals(result.getPath(), new File(project.getBuildDir(), "containers/name"));
     }
 
