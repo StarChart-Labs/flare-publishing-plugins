@@ -1,5 +1,7 @@
 # org.starchartlabs.flare.pom-scope-correction
 
+*WARNING: org.starchartlabs.flare.pom-scope-correction is deprecated as of Gradle 5.0, as are the associated nebula plug-ins. It is recommended to switch to Gradle's built-in dependency contraint system*
+
 The `pom-scope-correction` plug-in is a convention plug-in which is intended to apply a standard behavior of dependencies from the `compile` configuration having the Maven `compile` scope
 
 It is assumed that all projects are using Gradle's `maven-publish` plug-in.

@@ -20,6 +20,9 @@ public class PomScopeCorrectionPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
+        // GH-31: Warn of deprecation and eventual removal
+        project.logger.lifecycle("WARNING: org.starchartlabs.flare.pom-scope-correction is deprecated as of Gradle 5.0, as are the associated nebula plug-ins. It is recommended to switch to Gradle's built-in dependency contraint system")
+
         //maven-publish: Provides publishing configuration
         project.apply plugin: 'maven-publish'
 

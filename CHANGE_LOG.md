@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - (GH-30) Update minimum required Gradle version to 5.0
+- (GH-31) Deprecated org.starchartlabs.flare.pom-scope-correction
 
 ## [1.0.0]
 ### Changed
