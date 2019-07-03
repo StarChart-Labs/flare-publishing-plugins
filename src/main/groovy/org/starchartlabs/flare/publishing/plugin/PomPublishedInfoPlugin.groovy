@@ -47,9 +47,7 @@ public class PomPublishedInfoPlugin implements Plugin<Project> {
      */
     private void addProjectInfo(Project project, PublishedInfo info, MavenPublication pub){
         if(info.url != null){
-            pub.pom.withXml {
-                asNode().appendNode('url', "${info.url}")
-            }
+            pub.pom{ url = "${info.url}" }
         }
     }
 
@@ -61,19 +59,18 @@ public class PomPublishedInfoPlugin implements Plugin<Project> {
      */
     private void addScmInfo(Project project, PublishedInfo info, MavenPublication pub){
         if(info.scm.url != null || info.scm.connection != null || info.scm.developerConnection != null){
-            pub.pom.withXml {
-                Node scmNode = asNode().appendNode('scm')
+            pub.pom{
+                scm {
+                    if(info.scm.connection != null){
+                        connection = "${info.scm.connection}"
+                    }
 
-                if(info.scm.url != null){
-                    scmNode.appendNode('url', "${info.scm.url}")
-                }
-
-                if(info.scm.connection != null){
-                    scmNode.appendNode('connection', "${info.scm.connection}")
-                }
-
-                if(info.scm.developerConnection != null){
-                    scmNode.appendNode('developerConnection', "${info.scm.developerConnection}")
+                    if(info.scm.developerConnection != null){
+                        developerConnection = "${info.scm.developerConnection}"
+                    }
+                    if(info.scm.url != null){
+                        url = "${info.scm.url}"
+                    }
                 }
             }
         }
@@ -87,15 +84,15 @@ public class PomPublishedInfoPlugin implements Plugin<Project> {
      */
     private void addLicenseInfo(Project project, PublishedInfo info, MavenPublication pub){
         if(!info.licenses.isEmpty()){
-            pub.pom.withXml {
-                Node licensesNode = asNode().appendNode('licenses')
-
-                info.licenses.each { lic ->
-                    Node licenseNode = licensesNode.appendNode('license')
-
-                    licenseNode.appendNode('name', "${lic.name}")
-                    licenseNode.appendNode('url', "${lic.url}")
-                    licenseNode.appendNode('distribution', "${lic.distribution}")
+            pub.pom{
+                licenses {
+                    info.licenses.each { lic ->
+                        license {
+                            name = "${lic.name}"
+                            url = "${lic.url}"
+                            distribution = "${lic.distribution}"
+                        }
+                    }
                 }
             }
         }
@@ -109,15 +106,15 @@ public class PomPublishedInfoPlugin implements Plugin<Project> {
      */
     private void addDeveloperInfo(Project project, PublishedInfo info, MavenPublication pub){
         if(!info.developers.isEmpty()){
-            pub.pom.withXml {
-                Node developersNode = asNode().appendNode('developers')
-
-                info.developers.each{ dev ->
-                    Node developerNode = developersNode.appendNode('developer')
-
-                    developerNode.appendNode('id', "${dev.id}")
-                    developerNode.appendNode('name', "${dev.name}")
-                    developerNode.appendNode('url', "${dev.url}")
+            pub.pom{
+                developers {
+                    info.developers.each{ dev ->
+                        developer {
+                            id = "${dev.id}"
+                            name = "${dev.name}"
+                            email = "${dev.url}"
+                        }
+                    }
                 }
             }
         }

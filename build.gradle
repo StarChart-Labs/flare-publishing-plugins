@@ -121,6 +121,39 @@ publishedInfo {
     }
 }
 
+publishing {
+    publications {
+        nebula(MavenPublication) {
+            pom {
+                url = "${publishedInfo.url}"
+                licenses {
+                    publishedInfo.licenses.each { lic ->
+                        license {
+                            name = "${lic.name}"
+                            url = "${lic.url}"
+                            distribution = "${lic.distribution}"
+                        }
+                    }
+                }
+                developers {
+                    publishedInfo.developers.each{ dev ->
+                        developer {
+                            id = "${dev.id}"
+                            name = "${dev.name}"
+                            email = "${dev.url}"
+                        }
+                    }
+                }
+                scm {
+                    connection = "${publishedInfo.scm.connection}"
+                    developerConnection = "${publishedInfo.scm.developerConnection}"
+                    url = "${publishedInfo.scm.url}"
+                }
+            }
+        }
+    }
+}
+   
 bintray {
     user = System.getProperty('bintray_user')
     key = System.getProperty('bintray_key')

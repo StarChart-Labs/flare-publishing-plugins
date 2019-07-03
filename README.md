@@ -41,6 +41,46 @@ _Supported by plug-in version 1.x_
 
 _Supported by plug-in version 1.x and 2.x_
 
+#### Plug-in Version 1.x Required Workaround
+
+Plug-in versions 1.x work with Gradle 5, with the exception of the published info plug-in's maven POM integration. This can be corrected with the workaround described in [GH-36](https://github.com/StarChart-Labs/flare-publishing-plugins/issues/36) of applying the following the the root project after applying the plug-in:
+
+```
+publishing {
+    publications {
+        publications.withType(MavenPublication.class).all{ pub ->
+            pub.pom {
+                url = "${publishedInfo.url}"
+                licenses {
+                    publishedInfo.licenses.each { lic ->
+                        license {
+                            name = "${lic.name}"
+                            url = "${lic.url}"
+                            distribution = "${lic.distribution}"
+                        }
+                    }
+                }
+                developers {
+                    publishedInfo.developers.each{ dev ->
+                        developer {
+                            id = "${dev.id}"
+                            name = "${dev.name}"
+                            email = "${dev.url}"
+                        }
+                    }
+                }
+                scm {
+                    connection = "${publishedInfo.scm.connection}"
+                    developerConnection = "${publishedInfo.scm.developerConnection}"
+                    url = "${publishedInfo.scm.url}"
+                }
+            }
+        }
+    }
+}
+
+```
+
 ## Migrating Gradle Versions
 
 ### Gradle 3.x to 4.x

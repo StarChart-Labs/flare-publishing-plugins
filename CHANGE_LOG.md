@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - (GH-16) Simplified containers DSL setup to remove use of internal API, and by extension use of API deprecated in Gradle 5.0 
 - (GH-31) Deprecated org.starchartlabs.flare.pom-scope-correction
 - (GH-29) Switch from assemble depending on the container build task to depending on the container assemble task, which doesn't require docker and is more appropriate
+- (GH-36) Fixed issue with application of Maven POM information in Gradle 5.0+ projects
 
 ## [1.0.0]
 ### Changed
