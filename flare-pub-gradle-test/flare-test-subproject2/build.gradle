@@ -14,7 +14,8 @@ containers {
         }
         labels (
             "label1": "one",
-            "label2": "two"
+            "label2": "two",
+            "label 3": "three 3"
         )
     }
 }

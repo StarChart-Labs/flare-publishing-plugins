@@ -59,7 +59,7 @@ public class ContainerBuildTask extends Exec {
             container.getLabels().entrySet()
                     .forEach{e ->
                         currentArgs.add("--label")
-                        currentArgs.add("\"${e.key}=${e.value}\"")
+                        currentArgs.add("${e.key}=${e.value}")
                     }
         }
 
