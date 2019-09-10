@@ -19,7 +19,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath group: 'org.starchartlabs.flare', name: 'flare-publishing-plugins', version: '2.0.1'
+        classpath group: 'org.starchartlabs.flare', name: 'flare-publishing-plugins', version: '2.0.2'
     }
 }
 
