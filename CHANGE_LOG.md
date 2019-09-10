@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- (GH-38) Update prior fix to remove surrounding label kay/value in extra quotes
 
 ## [2.0.1]
 ### Changed
