@@ -140,8 +140,14 @@ publishing {
                         developer {
                             id = "${dev.id}"
                             name = "${dev.name}"
-                            email = "${dev.url}"
+                            url = "${dev.url}"
                         }
+                    }
+                }
+                contributors {
+                    contributor {
+                        name = 'DMaxfield-BDS'
+                        url = 'https://github.com/DMaxfield-BDS'
                     }
                 }
                 scm {
