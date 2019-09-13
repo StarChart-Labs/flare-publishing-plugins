@@ -1,5 +1,9 @@
 # flare-publishing-plugins
 
+This project has been deprecated in favor of [flare-plugins](https://github.com/StarChart-Labs/flare-plugins) - see the [migration guide](https://github.com/StarChart-Labs/flare-plugins/blob/master/docs/FLARE_PUBLISHING_MIGRATION.md) for information on transitioning to the new plug-ins.
+
+The one remaining piece of functionality not transferred is the `docker-base` and `docker-build` plug-ins - see the associated [GitHub Issue](https://github.com/StarChart-Labs/flare-plugins/issues/28) to view or contribute to the discussion of their fate
+
 [![Travis CI](https://img.shields.io/travis/com/StarChart-Labs/flare-publishing-plugins.svg?branch=master)](https://travis-ci.com/StarChart-Labs/flare-publishing-plugins) [![Code Coverage](https://img.shields.io/codecov/c/github/StarChart-Labs/flare-publishing-plugins.svg)](https://codecov.io/github/StarChart-Labs/flare-publishing-plugins) [![Black Duck Security Risk](https://copilot.blackducksoftware.com/github/repos/StarChart-Labs/flare-publishing-plugins/branches/master/badge-risk.svg)](https://copilot.blackducksoftware.com/github/repos/StarChart-Labs/flare-publishing-plugins/branches/master) [![Changelog validated by Chronicler](https://chronicler.starchartlabs.org/images/changelog-chronicler-success.png)](https://chronicler.starchartlabs.org/) [![Maven Central](https://img.shields.io/maven-central/v/org.starchartlabs.flare/flare-publishing-plugins.svg)](https://mvnrepository.com/artifact/org.starchartlabs.flare/flare-publishing-plugins) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 * [Legal](#legal)
